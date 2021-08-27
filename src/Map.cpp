@@ -85,7 +85,7 @@ bool Map::_isPixelFree(uint32_t x, uint32_t y)
 
 bool Map::_isOutOfBounds(uint32_t x, uint32_t y)
 {
-  return x < 0 || x > Map::mapWidth || y < 0 || y > Map::mapHeight;
+  return x < 0 || x >= Map::mapWidth || y < 0 || y >= Map::mapHeight;
 }
 
 void Map::_indexToCoords(uint32_t index, uint32_t &x, uint32_t &y)
