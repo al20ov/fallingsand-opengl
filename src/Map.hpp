@@ -26,6 +26,7 @@ class Map
   ~Map();
 
   Pixel *getMap();
+  void setPixel(int windowWidth, int windowHeight, double mouseX, double mouseY);
 
   private:
   Pixel _map[Map::mapWidth * Map::mapHeight];
