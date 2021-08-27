@@ -5,9 +5,8 @@
 
 Map::Map()
 {
-  for (int i = 0; i < Map::mapWidth * Map::mapHeight; i += 1) {
-    this->_map[i] = pixelTypes[AIR];
-  }
+  for (int i = 0; i < Map::mapWidth * Map::mapHeight; i += 1)
+  this->_map[i] = pixelTypes[AIR];
 }
 
 Map::~Map()
@@ -20,10 +19,9 @@ Map::~Map()
 
 void Map::computePhysics()
 {
-  for (uint32_t i = 0; i < Map::mapWidth * Map::mapHeight; i += 1) {
-    if (this->_map[i] == pixelTypes[SAND]) {
-      this->_computeSandPhysics(i);
-    }
+  for (uint32_t i = 0; i < Map::mapWidth * Map::mapHeight; i += 1)
+  if (this->_map[i] == pixelTypes[SAND]) {
+    this->_computeSandPhysics(i);
   }
 }
 
@@ -31,27 +29,25 @@ void Map::computePhysics()
 
 
 
-void Map::paintPixel(int windowWidth, int windowHeight, double mouseX, double mouseY)
+void Map::paintPixel(int windowWidth, int windowHeight, double mouseX, double mouseY, PixelType type)
 {
   uint32_t xPos = mouseX / (double)windowWidth * Map::mapWidth;
   uint32_t yPos = Map::mapHeight - (mouseY / (double)windowHeight * Map::mapHeight);
 
 
-  this->_setPixel(xPos, yPos, pixelTypes[SAND]);
+  this->_setPixel(xPos, yPos, type);
 }
 
-void Map::_setPixel(uint32_t x, uint32_t y, const Pixel &pixel)
+void Map::_setPixel(uint32_t x, uint32_t y, PixelType type)
 {
   if (!this->_isOutOfBounds(x, y))
-  this->_map[this->_coordsToIndex(x, y)] = pixel;
+  this->_map[this->_coordsToIndex(x, y)] = pixelTypes[type];
 }
 
 uint32_t Map::_coordsToIndex(uint32_t x, uint32_t y)
 {
   return x + Map::mapWidth * y;
 }
-
-
 
 
 void Map::_computeSandPhysics(uint32_t i)
@@ -70,12 +66,6 @@ void Map::_computeSandPhysics(uint32_t i)
     this->_map[this->_coordsToIndex(x + 1, y - 1)] = pixelTypes[SAND];
   }
 }
-
-
-
-
-
-
 
 
 bool Map::_isPixelFree(uint32_t x, uint32_t y)

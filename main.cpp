@@ -105,14 +105,27 @@ GLuint LoadShader(const char * vertex_path,
   return program;
 }
 
-void compute_round(GLFWwindow *window, Map &map) {
-  int state = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT);
+
+
+
+
+void compute_round(GLFWwindow *window, Map &map)
+{
+  int lClick = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT);
+  int rClick = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT);
+
   if (glfwGetWindowAttrib(window, GLFW_HOVERED)) {
-    if (state == GLFW_PRESS) {
-      map.paintPixel(windowWidth, windowHeight, mouseX, mouseY);
+    if (lClick == GLFW_PRESS) {
+      map.paintPixel(windowWidth, windowHeight, mouseX, mouseY, SAND);
+    } else if (rClick == GLFW_PRESS) {
+      map.paintPixel(windowWidth, windowHeight, mouseX, mouseY, STONE);
     }
   }
 }
+
+
+
+
 
 int main(int argc, char ** argv) {
   GLFWwindow * window;

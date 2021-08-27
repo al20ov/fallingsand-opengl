@@ -15,12 +15,14 @@ struct Pixel {
 
 enum PixelType {
   AIR,
-  SAND
+  SAND,
+  STONE
 };
 
 const Pixel pixelTypes[] = {
   { 0x17, 0x24, 0x63 }, // AIR
-  { 0xf0, 0xb0, 0x42 }  // SAND
+  { 0xf0, 0xb0, 0x42 }, // SAND
+  { 0x48, 0x48, 0x48 }  // STONE
 };
 
 class Map
@@ -35,11 +37,11 @@ class Map
   ~Map();
 
   Pixel *getMap();
-  void paintPixel(int windowWidth, int windowHeight, double mouseX, double mouseY);
+  void paintPixel(int windowWidth, int windowHeight, double mouseX, double mouseY, PixelType pixel);
   void computePhysics();
 
   private:
-  void _setPixel(uint32_t x, uint32_t y, const Pixel &pixel);
+  void _setPixel(uint32_t x, uint32_t y, PixelType type);
 
   uint32_t _coordsToIndex(uint32_t x, uint32_t y);
   void _indexToCoords(uint32_t index, uint32_t &x, uint32_t &y);
