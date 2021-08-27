@@ -14,12 +14,33 @@ Map::~Map()
 {
 }
 
-void Map::setPixel(int windowWidth, int windowHeight, double mouseX, double mouseY)
+void Map::computePhysics()
 {
-  int xPos = mouseX / (double)windowWidth * Map::mapWidth;
-  int yPos = Map::mapHeight - (mouseY / (double)windowHeight * Map::mapHeight);
 
-  this->_map[xPos + Map::mapWidth * yPos] = pixelTypes[SAND];
+}
+
+void Map::paintPixel(int windowWidth, int windowHeight, double mouseX, double mouseY)
+{
+  uint32_t xPos = mouseX / (double)windowWidth * Map::mapWidth;
+  uint32_t yPos = Map::mapHeight - (mouseY / (double)windowHeight * Map::mapHeight);
+
+  this->_setPixel(xPos, yPos, pixelTypes[SAND]);
+}
+
+void Map::_setPixel(uint32_t x, uint32_t y, const Pixel &pixel)
+{
+  this->_map[this->_coordsToIndex(x, y)] = pixel;
+}
+
+uint32_t Map::_coordsToIndex(uint32_t x, uint32_t y)
+{
+  return x + Map::mapWidth * y;
+}
+
+void Map::_indexToCoords(uint32_t index, uint32_t &x, uint32_t &y)
+{
+  x = index % Map::mapWidth;
+  y = index / Map::mapWidth;
 }
 
 Pixel *Map::getMap()

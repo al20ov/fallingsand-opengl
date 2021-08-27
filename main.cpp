@@ -109,7 +109,7 @@ void compute_round(GLFWwindow *window, Map &map) {
   int state = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT);
   if (glfwGetWindowAttrib(window, GLFW_HOVERED)) {
     if (state == GLFW_PRESS) {
-      map.setPixel(windowWidth, windowHeight, mouseX, mouseY);
+      map.paintPixel(windowWidth, windowHeight, mouseX, mouseY);
     }
   }
 }
@@ -193,6 +193,7 @@ int main(int argc, char ** argv) {
     glBindVertexArray(vao);
 
     compute_round(window, map);
+
 
     // glBindTexture(GL_TEXTURE_2D, texture);
     glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, Map::mapWidth, Map::mapHeight, GL_RGB, GL_UNSIGNED_BYTE, map.getMap());
