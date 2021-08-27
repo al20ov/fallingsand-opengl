@@ -1,4 +1,5 @@
-SRC					=				main.cpp
+SRC					=				main.cpp																		\
+										src/Map.cpp
 
 OUT					=				program
 
@@ -8,9 +9,11 @@ PREFLAGS		=				$(shell pkg-config --cflags glfw3)					\
 POSTFLAGS		=				$(shell pkg-config --static --libs glfw3)		\
 										$(shell pkg-config --static --libs glew)
 
+INCLUDE			=				-Isrc
+
 
 
 all:
-	g++ $(PREFLAGS) $(SRC) $(POSTFLAGS) -o $(OUT)
+	g++ $(INCLUDE) $(PREFLAGS) $(SRC) $(POSTFLAGS) -o $(OUT)
 
 .PHONY: all
