@@ -45,5 +45,7 @@ class Map
   bool _isOutOfBounds(uint32_t x, uint32_t y);
   bool _isPixelFree(uint32_t x, uint32_t y);
 
+  void _computeSandPhysics(uint32_t i);
+
   Pixel _map[Map::mapWidth * Map::mapHeight];
 };

@@ -193,6 +193,7 @@ int main(int argc, char ** argv) {
     glBindVertexArray(vao);
 
     compute_round(window, map);
+    map.computePhysics();
 
 
     // glBindTexture(GL_TEXTURE_2D, texture);
