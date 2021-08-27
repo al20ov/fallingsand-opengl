@@ -17,8 +17,10 @@
 int windowWidth = 1600;
 int windowHeight = 900;
 
-const int mapWidth = 160;
-const int mapHeight = 90;
+const int mapWidth = 80;
+const int mapHeight = 45;
+
+double mouseX, mouseY;
 
 void glfw_window_size_callback(GLFWwindow* window, int width, int height) {
   windowWidth = width;
@@ -26,6 +28,11 @@ void glfw_window_size_callback(GLFWwindow* window, int width, int height) {
   /* update any perspective matrices used here */
 }
 
+static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
+{
+  mouseX = xpos;
+  mouseY = ypos;
+}
 
 std::string readFile(const char *filePath) {
   std::string content;
@@ -108,6 +115,23 @@ GLuint LoadShader(const char *vertex_path, const char *fragment_path) {
 }
 
 
+
+
+
+
+
+void compute_round(GLFWwindow *window)
+{
+  if (glfwGetWindowAttrib(window, GLFW_HOVERED)) {
+    std::cout << "X: " << mouseX << "   Y: " << mouseY << std::endl;
+  }
+}
+
+
+
+
+
+
 int main(int argc, char **argv)
 {
   GLFWwindow *window;
@@ -125,6 +149,7 @@ int main(int argc, char **argv)
   }
   glfwMakeContextCurrent(window);
   glfwSetWindowSizeCallback(window, glfw_window_size_callback);
+  glfwSetCursorPosCallback(window, cursor_position_callback);
 
   glewExperimental = GL_TRUE;
   glewInit();
@@ -170,8 +195,6 @@ int main(int argc, char **argv)
 
   glBindTexture(GL_TEXTURE_2D, texture);
 
-  // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-  // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
@@ -194,13 +217,11 @@ int main(int argc, char **argv)
     glBindVertexArray(vao);
 
 
-    glBindTexture(GL_TEXTURE_2D, texture);
-    // for (int i = 0; i < (sizeof image); i += 3) {
-    //   image[i] = i+j;
-    //   image[i + 1] = 127;
-    //   image[i + 2] = 255;
-    // }
-    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, mapWidth, mapHeight, GL_RGB, GL_UNSIGNED_BYTE, image);
+    compute_round(window);
+
+
+    // glBindTexture(GL_TEXTURE_2D, texture);
+    // glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, mapWidth, mapHeight, GL_RGB, GL_UNSIGNED_BYTE, image);
 
     // how many triangles we are drawing
     glDrawArrays(GL_TRIANGLES, 0, sizeof points / 4);
