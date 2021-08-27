@@ -1,8 +1,10 @@
 #version 400
 
 out vec4 frag_color;
-in float data;
+in vec2 data;
+
+uniform sampler2D tex;
 
 void main() {
-  frag_color = vec4(data, data, data, 1.0);
+  frag_color = texture(tex, data) * vec4(1.0);
 }

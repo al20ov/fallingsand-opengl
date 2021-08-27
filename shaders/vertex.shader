@@ -1,10 +1,10 @@
 #version 400
 
-in vec3 vp;
+in vec4 vp;
 
-out float data;
+out vec2 data;
 
 void main() {
   gl_Position = vec4(vp.xy, 0.0, 1.0);
-  data = vp.z;
+  data = vec2(vp.zw);
 }
