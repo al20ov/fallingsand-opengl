@@ -192,8 +192,8 @@ int main(int argc, char ** argv) {
     glUseProgram(shader_program);
     glBindVertexArray(vao);
 
-    compute_round(window, map);
     map.computePhysics();
+    compute_round(window, map);
 
 
     // glBindTexture(GL_TEXTURE_2D, texture);

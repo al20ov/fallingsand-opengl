@@ -59,10 +59,15 @@ void Map::_computeSandPhysics(uint32_t i)
   uint32_t x, y;
 
   this->_indexToCoords(i, x, y);
-  if (!this->_isOutOfBounds(x, y - 1))
-  if (this->_isPixelFree(x, y - 1)) {
+  if (!this->_isOutOfBounds(x, y - 1) and this->_isPixelFree(x, y - 1)) {
     this->_map[i] = pixelTypes[AIR];
     this->_map[this->_coordsToIndex(x, y - 1)] = pixelTypes[SAND];
+  } else if (!this->_isOutOfBounds(x - 1, y - 1) and this->_isPixelFree(x - 1, y - 1)) {
+    this->_map[i] = pixelTypes[AIR];
+    this->_map[this->_coordsToIndex(x - 1, y - 1)] = pixelTypes[SAND];
+  } else if (!this->_isOutOfBounds(x + 1, y - 1) and this->_isPixelFree(x + 1, y - 1)) {
+    this->_map[i] = pixelTypes[AIR];
+    this->_map[this->_coordsToIndex(x + 1, y - 1)] = pixelTypes[SAND];
   }
 }
 
