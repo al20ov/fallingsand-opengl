@@ -26,6 +26,8 @@ const Pixel pixelTypes[] = {
 class Map
 {
   public:
+  // static const int mapWidth = 128;
+  // static const int mapHeight = 128;
   static const int mapWidth = 160;
   static const int mapHeight = 90;
 
