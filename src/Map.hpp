@@ -2,11 +2,16 @@
 
 typedef unsigned char byte;
 
-typedef struct {
+struct Pixel {
   byte r;
   byte g;
   byte b;
-} Pixel;
+
+  const inline bool operator==(const Pixel& other) const {
+    // TODO: change this to memcmp
+    return r == other.r and g == other.g and b == other.b;
+  }
+};
 
 enum PixelType {
   AIR,
@@ -14,8 +19,8 @@ enum PixelType {
 };
 
 const Pixel pixelTypes[] = {
-  { 0xb2, 0xee, 0xff }, // AIR
-  { 0xe3, 0xb5, 0x2e }  // SAND
+  { 0x17, 0x24, 0x63 }, // AIR
+  { 0xf0, 0xb0, 0x42 }  // SAND
 };
 
 class Map
@@ -36,6 +41,9 @@ class Map
 
   uint32_t _coordsToIndex(uint32_t x, uint32_t y);
   void _indexToCoords(uint32_t index, uint32_t &x, uint32_t &y);
+
+  bool _isOutOfBounds(uint32_t x, uint32_t y);
+  bool _isPixelFree(uint32_t x, uint32_t y);
 
   Pixel _map[Map::mapWidth * Map::mapHeight];
 };

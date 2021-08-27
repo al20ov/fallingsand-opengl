@@ -37,6 +37,16 @@ uint32_t Map::_coordsToIndex(uint32_t x, uint32_t y)
   return x + Map::mapWidth * y;
 }
 
+bool Map::_isPixelFree(uint32_t x, uint32_t y)
+{
+  return this->_map[this->_coordsToIndex(x, y)] == pixelTypes[AIR];
+}
+
+bool Map::_isOutOfBounds(uint32_t x, uint32_t y)
+{
+  return x < 0 || x > Map::mapWidth || y < 0 || y > Map::mapHeight;
+}
+
 void Map::_indexToCoords(uint32_t index, uint32_t &x, uint32_t &y)
 {
   x = index % Map::mapWidth;
