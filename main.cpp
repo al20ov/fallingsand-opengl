@@ -1,4 +1,5 @@
 #include <iostream>
+#include <array>
 #include <cstring>
 #include <fstream>
 #include <vector>
@@ -116,15 +117,12 @@ void compute_round(GLFWwindow *window, Map &map)
 
   if (glfwGetWindowAttrib(window, GLFW_HOVERED)) {
     if (lClick == GLFW_PRESS) {
-      map.paintPixel(windowWidth, windowHeight, mouseX, mouseY, SAND);
+      map.paintSmallBrush(windowWidth, windowHeight, mouseX, mouseY, SAND);
     } else if (rClick == GLFW_PRESS) {
-      map.paintPixel(windowWidth, windowHeight, mouseX, mouseY, STONE);
+      map.paintSmallBrush(windowWidth, windowHeight, mouseX, mouseY, STONE);
     }
   }
 }
-
-
-
 
 
 int main(int argc, char ** argv) {
