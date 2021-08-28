@@ -18,7 +18,7 @@ class Particle {
   Particle(ParticleType type);
   Particle();
 
-  const inline bool operator==(const Particle& other) const {
+  const inline bool operator==(const Particle&other) const {
     return this->_type == other._type;
   }
   ParticleType _type;

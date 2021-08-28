@@ -1,5 +1,6 @@
 SRC					=				main.cpp																		\
-										src/Map.cpp
+										src/Map.cpp																	\
+										src/Shader.cpp
 
 OUT					=				program
 
