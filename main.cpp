@@ -132,8 +132,7 @@ int main(int argc, char ** argv) {
     std::cerr << "Could not initialize GLFW3, exiting" << std::endl;
     return 1;
   }
-  glfwWindowHint(GLFW_SAMPLES, 4);
-  window = glfwCreateWindow(windowWidth, windowHeight, "coucouuu", NULL, NULL);
+  window = glfwCreateWindow(windowWidth, windowHeight, "Falling sand", NULL, NULL);
   if (!window) {
     std::cerr << "Could not open window with GLFW3" << std::endl;
     glfwTerminate();
