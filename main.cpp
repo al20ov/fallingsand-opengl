@@ -68,6 +68,8 @@ int main(int argc, char **argv) {
 
   glEnable(GL_DEPTH_TEST);
   glDepthFunc(GL_LESS);
+  // this enables gamma correction
+  glEnable(GL_FRAMEBUFFER_SRGB);
 
 
 
@@ -105,7 +107,9 @@ int main(int argc, char **argv) {
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
   Map map = Map();
+  // glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, Map::mapWidth, Map::mapHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, map.getBloomMap());
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Map::mapWidth, Map::mapHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, map.getMap());
+
   // Shader code here
 
   Shader mainShader("shaders/vertex.shader", "shaders/fragment.shader");
@@ -124,6 +128,7 @@ int main(int argc, char **argv) {
 
 
     // glBindTexture(GL_TEXTURE_2D, texture);
+    // glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, Map::mapWidth, Map::mapHeight, GL_RGBA, GL_UNSIGNED_BYTE, map.getBloomMap());
     glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, Map::mapWidth, Map::mapHeight, GL_RGB, GL_UNSIGNED_BYTE, map.getMap());
 
     // how many triangles we are drawing

@@ -5,7 +5,7 @@
 
 Map::Map()
 {
-  for (int i = 0; i < Map::mapWidth * Map::mapHeight; i += 1) {
+  for (uint32_t i = 0; i < Map::mapWidth * Map::mapHeight; i += 1) {
     this->_particles[i] = particleTypes[AIR];
     this->_map[i] = particleColors[AIR][0];
   }
@@ -101,7 +101,6 @@ void Map::_computeSandPhysics(uint32_t i)
 bool Map::_isParticleFree(uint32_t x, uint32_t y)
 {
   return this->_particles[this->_coordsToIndex(x, y)] == particleTypes[AIR];
-  // return this->_map[this->_coordsToIndex(x, y)] == particleColors[AIR];
 }
 
 bool Map::_isOutOfBounds(uint32_t x, uint32_t y)
@@ -120,16 +119,34 @@ Color *Map::getMap()
   return this->_map;
 }
 
+RgbaColor *Map::getBloomMap()
+{
+  for (uint32_t i = 0; i < Map::mapWidth * Map::mapHeight; i += 1) {
+    if (this->_particles[i] == particleTypes[AIR]) {
+      this->_bloomMap[i] = { 0x7f, 0xf5, 0xff, 0xff };
+    } else {
+      this->_bloomMap[i] = { 0x00, 0x00, 0x00, 0x00 };
+    }
+  }
+  return this->_bloomMap;
+}
+
 
 
 
 
 
 Particle::Particle(ParticleType type)
-  : _type(type)
+  : _type(type), _velocity(1)
 {
 }
+
 
 Particle::Particle()
 {
 }
+
+// void Particle::applyGravity(void)
+// {
+//   this->_velocity += 1;
+// }
